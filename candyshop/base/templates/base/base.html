@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Python training course - Django blog project">
+  <title>Django Blog</title>
+  <link rel="icon" type="image/svg+xml" href="  {% static "base/images/favicon.svg" %}">
+  <link rel="icon" type="image/png" href="{% static "base/images/favicon.png"  %}">
+  <link rel="stylesheet" href=" {% static "base/css/bootstrap.min.css"  %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href=" {% static "base/css/blog.min.css"  %}">
+</head>
+<body>
+
+<header class="blog-header lh-1 py-3">
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-4">
+        <img src=" {% static "/base/images/logo.svg" %} " alt="logo" class="logo">
+      </div>
+      <div class="col-4 text-center">
+        <a href="/" class="blog-title text-dark">Інтернет-магазин</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center dropdown">
+
+        {% if user.is_authenticated %}
+          <div class="dropdown-toggle" data-bs-toggle="dropdown">
+          <img src=" {% static "/base/images/logo.svg" %}" alt="avatar" class="avatar rounded-circle">
+          <span> Hello, {{ user.get_username }} </span>
+        </div>
+        <ul class="dropdown-menu" role="menu">
+          <li><a class="dropdown-item" href="changepassword.html">Profile</a></li>
+          <li><a class="dropdown-item" href="logout.html">Logout</a></li>
+        </ul>
+        {% else %}
+        <div class="dropdown-toggle" data-bs-toggle="dropdown">
+          <img src=" {% static "base/images/anonymous.svg" %}" alt="avatar" class="avatar rounded-circle">
+        </div>
+        <ul class="dropdown-menu" role="menu">
+          <li><a class="dropdown-item" href="signin.html">Sign In</a></li>
+          <li><a class="dropdown-item" href="signup.html">Sign Up</a></li>
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+{% block mainmenu %}
+{% endblock %}
+
+ {% block content %}
+ {% endblock %}
+
+{% block add_product %}
+{% endblock %}
+
+ <section class="col-md-3">
+      <div class="position-sticky">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="h4">About Us</h4>
+          <p>
+            To the puréed cracker crumps add turkey, popcorn, melon sauce and sweet leek. Mackerel stew has to have a
+            delicious, shredded margerine component.
+          </p>
+        </div>
+        <div class="ps-4">
+          <h4>Out social media</h4>
+          <ul class="nav">
+            <li class="nav-item"><a href="" class="nav-link"><i class="social bi bi-facebook"></i></a></li>
+            <li class="nav-item"><a href="" class="nav-link"><i class="social bi bi-instagram"></i></a></li>
+            <li class="nav-item"><a href="" class="nav-link"><i class="social bi bi-github"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+<script src=" {% static "base/js/bootstrap.bundle.js" %}" ></script>
+<script src="  {% static "base/js/blog.js" %}" ></script>
+</body>
+</html>

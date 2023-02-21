@@ -1,0 +1,10 @@
+{% include "base/homepage.html" %}
+
+
+<h1>{{product.title}}</h1>
+
+{% if product.photo %}
+<p><img class="img-article-left" src="{{product.image.url}}"></p>
+{% endif %}
+
+{{product.description|linebreaks}}

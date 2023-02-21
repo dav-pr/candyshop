@@ -16,9 +16,9 @@
 {% block content %}
 
 <section class="col-md-9 mb-2" role="main">
-      <h1 class="h1">{{title_product}}</h1>
+      <h1 class="h1">{{title_returns}}</h1>
       <div class="row row-cols-1 row-cols-md-3 g-4 position-relative">
-        {% for p in products %}
+        {% for p in returns %}
           <article class="col">
           <div class="card shadow">
             <img src="{{p.image.url}}" alt="Фото товару" class="card-img-top">
@@ -46,6 +46,3 @@
     </section>
 
 {% endblock content %}
-
-
-
