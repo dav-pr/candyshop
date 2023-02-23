@@ -1,0 +1,10 @@
+
+{% include "base/homepage.html" %}
+
+
+  <h2>Редагування продукту</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
