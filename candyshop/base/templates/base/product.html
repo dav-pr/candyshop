@@ -1,5 +1,6 @@
-{% include "base/homepage.html" %}
+{% extends "base/homepage.html" %}
 
+{% block product_detail %}
 
 <h1>{{product.name}}</h1>
 
@@ -22,3 +23,5 @@
 
 
 {% endif %}
+
+{% endblock product_detail %}

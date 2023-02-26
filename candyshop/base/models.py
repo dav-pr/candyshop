@@ -6,7 +6,7 @@ from autoslug import AutoSlugField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
-from .Constants import START_WALLET_BALANCE
+from .constants import START_WALLET_BALANCE
 
 
 class User(AbstractUser):

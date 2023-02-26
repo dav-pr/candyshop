@@ -1,15 +1,8 @@
-{% extends "base/base.html" %}
+{% extends "base/homepage.html" %}
 
 {% block mainmenu %}
 
-<div class="nav-scroller py-1 mb-3">
-    <nav class="nav d-flex justify-content-between">
-
-      {% for m in menu %}
-        <div class="nav-item"><a href="{% url m.url_name %}" class="nav-link link-secondary">{{m.title}}</a></div>
-      {% endfor %}
-    </nav>
-  </div>
+{% include "base/menu.html" %}
 
 {% endblock mainmenu %}
 
@@ -23,14 +16,12 @@
           <div class="card shadow">
             <img src="{{r.purchase.product.image.url}}" alt="Фото товару" class="card-img-top">
             <div class="card-body">
-              <strong class="fw-light">category</strong>
               <h2 class="card-title">{{r.purchase.product.name}}</h2>
               <small>
                 <i class="bi bi-person mx-1"></i><a href="" class="fw-bolder link-secondary">Покупець: {{r.buyer}}</a>
                 <i class="bi bi-calendar mx-1"></i><span> Дата покупки: {{r.purchase.purchase_date}} </span>
               </small>
                 <p class="card-text">Ціна: {{r.purchase.product.price}} Кількість: {{r.purchase.quantity}} Загальна ціна: {{r.purchase.total_price}}.</p>
-              <p class="card-text">With ghees drink pork butt sauce.</p>
               <form method="post" action="notice_return/{{r.pk}}">
                   {% csrf_token %}
                   <input type="hidden" name="return_pk" value="{{r.pk}}">
@@ -47,12 +38,5 @@
 
        {% endfor %}
 
-        <nav class="blog-pagination" aria-label="Pagination">
-          <a href="" class="btn btn-outline-primary rounded-pill">Older</a>
-          <a href="" class="btn btn-outline-success rounded-pill">Newer</a>
-        </nav>
-
-      </div>
-    </section>
 
 {% endblock content %}

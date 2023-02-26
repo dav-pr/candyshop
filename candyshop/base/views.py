@@ -12,7 +12,7 @@ from django.views.generic.edit import CreateView
 
 from .forms import CustomUserCreationForm, LoginForm, AddProductForm
 from .models import Product, Return, CartItem, Cart, Purchase
-from .Constants import *
+from .constants import *
 
 
 @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url='homepage'), name='dispatch')

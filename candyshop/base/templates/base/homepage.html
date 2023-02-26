@@ -1,16 +1,8 @@
 {% extends "base/base.html" %}
 
-
 {% block mainmenu %}
 
-<div class="nav-scroller py-1 mb-3">
-    <nav class="nav d-flex justify-content-between">
-
-      {% for m in menu %}
-        <div class="nav-item"><a href="{% url m.url_name %}" class="nav-link link-secondary">{{m.title}}</a></div>
-      {% endfor %}
-    </nav>
-  </div>
+{% include "base/menu.html" %}
 
 {% endblock mainmenu %}
 
@@ -24,12 +16,7 @@
           <div class="card shadow">
             <img src="{{p.image.url}}" alt="Фото товару" class="card-img-top">
             <div class="card-body">
-              <strong class="fw-light">category</strong>
               <h2 class="card-title">{{p.name}}</h2>
-              <small>
-                <i class="bi bi-person mx-1"></i><a href="" class="fw-bolder link-secondary">Article Author</a>
-                <i class="bi bi-calendar mx-1"></i><span>June 10, 2022</span>
-              </small>
               {% if user.is_authenticated %}
                 <p class="card-text">Ціна: {{p.price}} В наявності: {{p.available_quantity}}.</p>
               {% endif %}
@@ -43,15 +30,37 @@
 
        {% endfor %}
 
-        <nav class="blog-pagination" aria-label="Pagination">
-          <a href="" class="btn btn-outline-primary rounded-pill">Older</a>
-          <a href="" class="btn btn-outline-success rounded-pill">Newer</a>
-        </nav>
-
       </div>
     </section>
 
 {% endblock content %}
+
+{% block footer %}
+ <nav class="blog-pagination" aria-label="Pagination">
+          <a href="" class="btn btn-outline-primary rounded-pill">Older</a>
+          <a href="" class="btn btn-outline-success rounded-pill">Newer</a>
+ </nav>
+<section class="col-md-3">
+      <div class="position-sticky">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="h4">About Us</h4>
+          <p>
+            Інтернет-магазин, у якому можна придбати усе: від роутерів до меблів. 25 років успішного ведення бізнесу.
+
+          </p>
+        </div>
+        <div class="ps-4">
+          <h4>Out social media</h4>
+          <ul class="nav">
+            <li class="nav-item"><a href="" class="nav-link"><i class="social bi bi-facebook"></i></a></li>
+            <li class="nav-item"><a href="" class="nav-link"><i class="social bi bi-instagram"></i></a></li>
+            <li class="nav-item"><a href="" class="nav-link"><i class="social bi bi-github"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+{% endblock footer %}
 
 
 
