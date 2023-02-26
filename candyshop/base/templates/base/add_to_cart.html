@@ -1,0 +1,17 @@
+{% include "base/homepage.html" %}
+
+
+  <div class="container">
+    <h1>Додавання до кошика </h1>
+   {% if user.is_authenticated and not user.is_superuser%}
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      <label for="quantity">Quantity:</label>
+      <input type="number" name="quantity" value="1" min="1" required>
+      <button type="submit">Додати до кошика</button>
+    </form>
+  </div>
+
+{% endif %}

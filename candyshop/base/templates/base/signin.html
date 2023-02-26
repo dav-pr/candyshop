@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<main class="form-auth form-signin w-100 m-auto">
+  <form "{% url 'signin' %}" method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <div class="form-floating">
+      {{form.username}}
+      <label for="username">Username</label>
+    </div>
+    <div class="form-floating">
+      {{form.password}}
+      <label for="password">Password</label>
+    </div>
+     <div class="my-3">
+      <p>Have no account?</p>
+      <a href="signup.html" class="text-body fw-bold">Sing up now</a>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+  </form>
+</main>
+
+{% endblock %}

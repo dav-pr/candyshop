@@ -1,0 +1,12 @@
+{% block mainmenu %}
+
+<div class="nav-scroller py-1 mb-3">
+    <nav class="nav d-flex justify-content-between">
+
+      {% for m in menu %}
+        <div class="nav-item"><a href="{% url m.url_name %}" class="nav-link link-secondary">{{m.title}}</a></div>
+      {% endfor %}
+    </nav>
+  </div>
+
+{% endblock mainmenu %}
