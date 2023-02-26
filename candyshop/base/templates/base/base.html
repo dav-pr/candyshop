@@ -31,6 +31,9 @@
           <div class="dropdown-toggle" data-bs-toggle="dropdown">
           <img src=" {% static "/base/images/logo.svg" %}" alt="avatar" class="avatar rounded-circle">
           <span> Hello, {{ user.get_username }} </span>
+            {% if user.is_authenticated and not user.is_superuser%}
+            <span> , {{ wallet_balance }} {{wallet_currency}} </span>
+            {% endif %}
         </div>
         <ul class="dropdown-menu" role="menu">
           <li><a class="dropdown-item" href="changepassword.html">Profile</a></li>

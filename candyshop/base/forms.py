@@ -55,8 +55,14 @@ class AddProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'description', 'image', 'price', 'available_quantity']
 
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'multiple': False}),
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
+
+
 

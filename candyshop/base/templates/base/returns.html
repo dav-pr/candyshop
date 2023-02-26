@@ -18,19 +18,29 @@
 <section class="col-md-9 mb-2" role="main">
       <h1 class="h1">{{title_returns}}</h1>
       <div class="row row-cols-1 row-cols-md-3 g-4 position-relative">
-        {% for p in returns %}
+        {% for r in returns %}
           <article class="col">
           <div class="card shadow">
-            <img src="{{p.image.url}}" alt="Фото товару" class="card-img-top">
+            <img src="{{r.purchase.product.image.url}}" alt="Фото товару" class="card-img-top">
             <div class="card-body">
               <strong class="fw-light">category</strong>
-              <h2 class="card-title">{{p.name}}</h2>
+              <h2 class="card-title">{{r.purchase.product.name}}</h2>
               <small>
-                <i class="bi bi-person mx-1"></i><a href="" class="fw-bolder link-secondary">Article Author</a>
-                <i class="bi bi-calendar mx-1"></i><span>June 10, 2022</span>
+                <i class="bi bi-person mx-1"></i><a href="" class="fw-bolder link-secondary">Покупець: {{r.buyer}}</a>
+                <i class="bi bi-calendar mx-1"></i><span> Дата покупки: {{r.purchase.purchase_date}} </span>
               </small>
+                <p class="card-text">Ціна: {{r.purchase.product.price}} Кількість: {{r.purchase.quantity}} Загальна ціна: {{r.purchase.total_price}}.</p>
               <p class="card-text">With ghees drink pork butt sauce.</p>
-              <a href="{{ p.get_absolute_url }}" class="card-link text-body fw-bold">Детально...</a>
+              <form method="post" action="notice_return/{{r.pk}}">
+                  {% csrf_token %}
+                  <input type="hidden" name="return_pk" value="{{r.pk}}">
+                  <button class="btn btn-outline-primary rounded-pill" type="submit">Підтвердити повернення</button>
+              </form>
+                <form method="post" action="vitality_return/{{r.pk}}">
+                  {% csrf_token %}
+                  <input type="hidden" name="return_pk" value="{{r.pk}}">
+                  <button class="btn btn-outline-primary rounded-pill" type="submit">Відхилити повернення</button>
+              </form>
             </div>
           </div>
         </article>

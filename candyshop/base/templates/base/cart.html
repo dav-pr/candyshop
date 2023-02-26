@@ -1,10 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base/base.html" %}
+
+{% block mainmenu %}
+
+<div class="nav-scroller py-1 mb-3">
+    <nav class="nav d-flex justify-content-between">
+
+      {% for m in menu %}
+        <div class="nav-item"><a href="{% url m.url_name %}" class="nav-link link-secondary">{{m.title}}</a></div>
+      {% endfor %}
+    </nav>
+  </div>
+
+{% endblock mainmenu %}
+
+{% block content %}
+
+<section class="col-md-9 mb-2" role="main">
+      <h1 class="h1">{{title_cart}}</h1>
+            <h2 class="h2">Вартість: {{total_price}} </h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4 position-relative">
+        {% for p in products %}
+          <article class="col">
+          <div class="card shadow">
+            <img src="{{p.product.image.url}}" alt="Фото товару" class="card-img-top">
+            <div class="card-body">
+              <strong class="fw-light">category</strong>
+              <h2 class="card-title">{{p.product.name}}</h2>
+              <small>
+                <i class="bi bi-person mx-1"></i><a href="" class="fw-bolder link-secondary">Додано</a>
+                <i class="bi bi-calendar mx-1"></i><span>{{p.created_at}}</span>
+              </small>
+              {% if user.is_authenticated %}
+                <p class="card-text">Ціна: {{p.product.price}} Кількість: {{p.quantity}} Загальна ціна: {{p.total_price}}.</p>
+              {% endif %}
+              <a href="{{ p.get_absolute_url }}" class="card-link text-body fw-bold">Детально...</a>
+                {% if user.is_superuser %}
+                <a href="{{ p.get_absolute_url }}edit" class="card-link text-body fw-bold">Редагувати...</a>
+                {% endif %}
+            </div>
+          </div>
+        </article>
+
+       {% endfor %}
+
+          <div class="card-body">
+
+          </div>
+
+
+        <div >
+         {% if not p %}
+              <form method="post" action="buy">
+                  {% csrf_token %}
+                  <input type="hidden" name="cart_id" value="{{cart_id}}">
+                  <button class="btn btn-outline-primary rounded-pill" type="submit">Купити</button>
+              </form>
+              {% endif %}
+
+        </div>
+
+      </div>
+    </section>
+
+{% endblock content %}

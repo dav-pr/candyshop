@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+{% extends "base/base.html" %}
+
+{% block mainmenu %}
+
+<div class="nav-scroller py-1 mb-3">
+    <nav class="nav d-flex justify-content-between">
+
+      {% for m in menu %}
+        <div class="nav-item"><a href="{% url m.url_name %}" class="nav-link link-secondary">{{m.title}}</a></div>
+      {% endfor %}
+    </nav>
+  </div>
+
+{% endblock mainmenu %}
+
+{% block content %}
+
+<section class="col-md-9 mb-2" role="main">
+      <h1 class="h1">{{title_purchase}}</h1>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4 position-relative">
+        {% for p in purchases %}
+          <article class="col">
+          <div class="card shadow">
+            <img src="{{p.product.image.url}}" alt="Фото товару" class="card-img-top">
+            <div class="card-body">
+              <strong class="fw-light">category</strong>
+              <h2 class="card-title">{{p.product.name}}</h2>
+              <small>
+                <i class="bi bi-person mx-1"></i><a href="" class="fw-bolder link-secondary">Придбано</a>
+                <i class="bi bi-calendar mx-1"></i><span>{{p.purchase_date_user}}</span>
+              </small>
+              {% if user.is_authenticated %}
+                <p class="card-text">Ціна: {{p.product.price}} Кількість: {{p.quantity}} Загальна ціна: {{p.total_price}}.</p>
+                    {% if p.is_active %}
+                    <form method="post" action="return/{{p.pk}}">
+                      {% csrf_token %}
+                      <input type="hidden" name="purchase_pk" value="{{p.pk}}">
+                      <button class="btn btn-outline-primary rounded-pill" type="submit">Повернути</button>
+                  </form>
+                    {% endif %}
+                {% endif %}
+              <a href="{{ p.product.get_absolute_url }}" class="card-link text-body fw-bold">Детально...</a>
+                {% if user.is_superuser %}
+                <a href="{{ p.get_absolute_url }}edit" class="card-link text-body fw-bold">Редагувати...</a>
+                {% endif %}
+            </div>
+          </div>
+        </article>
+
+       {% endfor %}
+
+        <nav class="blog-pagination" aria-label="Pagination">
+          <a href="" class="btn btn-outline-primary rounded-pill">Older</a>
+          <a href="" class="btn btn-outline-success rounded-pill">Newer</a>
+        </nav>
+
+      </div>
+    </section>
+
+{% endblock content %}
+

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
     "base"
 ]
 
@@ -107,7 +108,8 @@ PASSWORD_HASHERS = [    'django.contrib.auth.hashers.PBKDF2PasswordHasher',]
 
 LANGUAGE_CODE = "uk"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Kiev'
+DATE_FORMAT = 'd M Y'
 
 USE_I18N = True
 
